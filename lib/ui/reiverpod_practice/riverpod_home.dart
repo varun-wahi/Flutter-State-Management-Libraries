@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:state_mgmt_tut_app/ui/reiverpod_practice/riverpod_counter_app.dart';
+import 'package:state_mgmt_tut_app/ui/reiverpod_practice/riverpod_toDos_page.dart';
 
 class RiverPodHome extends StatelessWidget {
   const RiverPodHome({super.key});
@@ -7,7 +8,7 @@ class RiverPodHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Riverpod counter app")),
+      appBar: AppBar(title: const Text("Riverpod State Management")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -23,7 +24,10 @@ class RiverPodHome extends StatelessWidget {
                 )),
             const SizedBox(height: 20),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                          Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const RiverpodToDosPage()));
+                },
                 child: const Text(
                   "Riverpod API call",
                   style: TextStyle(fontSize: 20.0),

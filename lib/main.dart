@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:state_mgmt_tut_app/ui/bloc_practice/manager/counter/counter_bloc.dart';
+import 'package:state_mgmt_tut_app/ui/bloc_practice/manager/network_bloc/network_bloc.dart';
 import 'package:state_mgmt_tut_app/ui/home_page.dart';
 
 void main() {
@@ -11,8 +14,36 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage()
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CounterBloc>(create: (_) => CounterBloc()),
+        BlocProvider<NetworkBloc>(create: (_) => NetworkBloc()),
+      ],
+      
+      child: BlocProvider<CounterBloc>(
+        create: (context) => CounterBloc(),
+        child: MaterialApp(
+            theme: ThemeData(
+              useMaterial3: true,
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0),
+        
+                  ),
+                  backgroundColor: Colors.black.withOpacity(0.7),
+                  foregroundColor: Colors.white
+                )
+              ),
+        
+              floatingActionButtonTheme: FloatingActionButtonThemeData(
+                backgroundColor: Colors.black.withOpacity(0.7),
+                  foregroundColor: Colors.white
+              )
+              
+            ),
+            debugShowCheckedModeBanner: false,
+            home: HomePage()),
+      ),
     );
   }
 }

@@ -9,6 +9,13 @@ class RiverpodCounterApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final count = ref.watch(counterProvider);
+    ref.listen(counterProvider, (previous, next){
+      if(next < 0){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Negative value not allowed.")));
+      }
+
+    });
+
 
     return Scaffold(
       appBar: AppBar(
@@ -32,7 +39,16 @@ class RiverpodCounterApp extends ConsumerWidget {
           FloatingActionButton(
             heroTag: "2",
             child: const Icon(Icons.remove),
-            onPressed: () {},
+            onPressed: () {
+              int counterValue = ref.read(counterProvider.notifier).state;
+              if(counterValue > 0 ){
+                ref.read(counterProvider.notifier).state--;
+              }
+              else{
+                print("value can't be decreased");
+              }
+              
+            },
           ),
 
           SizedBox(width: 20.0,),
@@ -40,7 +56,9 @@ class RiverpodCounterApp extends ConsumerWidget {
           FloatingActionButton(
             heroTag: "3",
             child: const Icon(Icons.refresh),
-            onPressed: () {},
+            onPressed: () {
+              ref.refresh(counterProvider);
+            },
           ),
         ],
       ),
