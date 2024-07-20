@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_mgmt_tut_app/ui/bloc_practice/manager/counter/counter_bloc.dart';
 import 'package:state_mgmt_tut_app/ui/bloc_practice/manager/network_bloc/network_bloc.dart';
 import 'package:state_mgmt_tut_app/ui/cubit_practice/manager/counter_cubit.dart';
+import 'package:state_mgmt_tut_app/ui/cubit_practice/manager/network_cubit/network_cubit.dart';
 import 'package:state_mgmt_tut_app/ui/home_page.dart';
 
 void main() {
@@ -18,6 +19,7 @@ class MainApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<CounterCubit>(create: (_) => CounterCubit()),
+        BlocProvider<NetworkCubit>(create: (_) => NetworkCubit()..getTodos()),
         BlocProvider<CounterBloc>(create: (_) => CounterBloc()),
         BlocProvider<NetworkBloc>(create: (_) => NetworkBloc()),
       ],
