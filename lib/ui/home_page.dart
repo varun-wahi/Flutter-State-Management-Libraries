@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:state_mgmt_tut_app/ui/bloc_practice/bloc_home.dart';
+import 'package:state_mgmt_tut_app/ui/cubit_practice/cubit_home_page.dart';
 import 'package:state_mgmt_tut_app/ui/reiverpod_practice/riverpod_home.dart';
 
 class HomePage extends StatelessWidget {
@@ -24,7 +25,10 @@ class HomePage extends StatelessWidget {
                 )),
                 const SizedBox(height: 20),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                   Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => CubitHomePage()));
+                },
                 child: Text(
                   "Flutter Cubit",
                   style: TextStyle(fontSize: 20),
